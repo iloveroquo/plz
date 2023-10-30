@@ -66,6 +66,10 @@ document.addEventListener("DOMContentLoaded", function() {
         chrometab: {
             favicon: "../../images/icons/chromenewtab.ico",
             title: "New Tab"
+        },
+        googledrive: {
+            favicon: "../../images/icons/googledrive.ico",
+            title: "My Drive"
         }
     };
 
@@ -84,4 +88,4 @@ document.addEventListener("DOMContentLoaded", function() {
     
         document.head.appendChild(newFavicon);
     }
-});
+});  
