@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="storage/css/settings4.css">
         <title>Settings | Seraph</title>
 
-        <meta name="description" content="seraph; an open source unblocked games website hosting 100+ games with downloadable support, a clean and centralised user interface and no iframe embedding">
+        <meta name="description" content="seraph; an open source unblocked games website hosting 300+ games with rehosting support, custom themes, cloaking, apps + more!">
         <meta property="og:site_name" content="seraph">
         <meta property="og:title" content="seraph">
         <meta property="og:type" content="website">
@@ -74,6 +74,54 @@
 
         <script src="storage/js/cursor.js"></script>
         <script src="storage/js/cloak.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                if (hasOptionBeenAdded()) {
+                    addOption();
+                }
+
+                document.body.addEventListener('keyup', function (event) {
+                    var typedLetter = event.key.toLowerCase();
+
+                    if (typedLetter === expectedSequence[typedSequence.length]) {
+                        typedSequence += typedLetter;
+                        if (typedSequence === expectedSequence) {
+                            addOption();
+                            setOptionAddedFlag();
+                        }
+                        clearTimeout(timeout);
+                        timeout = setTimeout(function () {
+                            typedSequence = '';
+                        }, 1000);
+                    } else {
+                        typedSequence = '';
+                    }
+                });
+            });
+
+            var expectedSequence = 'amongus';
+            var typedSequence = '';
+            var timeout;
+            function hasOptionBeenAdded() {
+                return localStorage.getItem('misinformationAdded') === 'true';
+            }
+            function setOptionAddedFlag() {
+                localStorage.setItem('misinformationAdded', 'true');
+            }
+
+            function addOption() {
+                var selectElement = document.getElementById('theme-select');
+                var existingOption = selectElement.querySelector('option[value="misinformation"]');
+                
+                if (!existingOption) {
+                    var newOption = document.createElement('option');
+                    newOption.value = 'misinformation';
+                    newOption.textContent = 'misinformation';
+                    selectElement.appendChild(newOption);
+                }
+            }
+        </script>
 
         <script>
             function applyTheme() {
