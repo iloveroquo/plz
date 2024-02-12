@@ -38,7 +38,7 @@
         </style>
   </head>
   <body>
-        <div class="cursor"></div>
+    
         <h1 class="typewriter"><span id="cursor"></span></h1>
 
         <input type="text" id="search" placeholder="⌕ search" autocomplete="off">
@@ -52,7 +52,7 @@
             <option value="simulation">simulation</option>
         </select>
         
-        <p class="linkp"><a href="../index.html">homepage</a> •  <a href="https://github.com/a456pur/seraph" target="_blank">github</a> •  <a href="https://discord.gg/ZyZDmx3zuQ" target="_blank">discord</a></p>
+        <p class="linkp"><a href="../index.html">homepage</a> •  <a href="https://github.com/a456pur/seraph" target="_blank">github</a> •  <a href="https://discord.gg/ZyZDmx3zuQ" target="_blank">discord</a> •  <a id="openBlankLink">open blank</a></p>
         
         <br>
         <h2 class="pinned-header">starred games</h2>
@@ -2439,6 +2439,27 @@
                 </div>
             </a>
 
+            <a target="_blank" href="10minutestilldawn/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/10minutestilldawn.png');" data-genre="arcade">
+                    <h2>10 minutes till dawn</h2>
+                    <span class="pin-button">☆</span>
+                </div>
+            </a>
+
+            <a target="_blank" href="volleyrandom/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/volleyrandom.png');" data-genre="arcade">
+                    <h2>volley random</h2>
+                    <span class="pin-button">☆</span>
+                </div>
+            </a>
+
+            <a target="_blank" href="waterworks/index.html">
+                <div class="button" style="background-image: url('../images/thumbnails/waterworks.png');" data-genre="simulation">
+                    <h2>waterworks</h2>
+                    <span class="pin-button">☆</span>
+                </div>
+            </a>
+
             <br>
             <br>
             <br>
@@ -2448,7 +2469,6 @@
         <p> // all games playable on this website are complete copyright & property of their respective owners \\</p>
 
         <br>
-        <script src="../storage/js/cursor.js"></script>
         <script src="../storage/js/cloak.js"></script>
         <script src="../storage/js/theme.js"></script>
 
@@ -2515,6 +2535,46 @@
 
             type();
         </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var openBlankLink = document.getElementById('openBlankLink');
+            
+                openBlankLink.addEventListener('click', function(event) {
+                    event.preventDefault();
+            
+                    var newTab = window.open('about:blank', '_blank');
+            
+                    if (newTab) {
+                        var newTabBody = newTab.document.body;
+                        newTabBody.style.padding = '0';
+                        newTabBody.style.margin = '0';
+                        newTabBody.style.border = 'hidden';
+            
+                        var iframe = document.createElement('iframe');
+                        iframe.src = window.location.href;
+                        iframe.style.width = '100%';
+                        iframe.style.height = '100%';
+                        iframe.style.border = 'hidden';
+
+                        iframe.onload = function() {
+                            var links = iframe.contentDocument.querySelectorAll('a[target="_blank"]');
+                            links.forEach(function(link) {
+                                link.addEventListener('click', function(event) {
+                                    event.preventDefault();
+                                    iframe.contentWindow.location.href = link.href;
+                                });
+                            });
+                        };
+            
+                        newTab.document.body.appendChild(iframe);
+                    } else {
+                        alert("couldn't manage to open a new tab :(");
+                    }
+                });
+            });
+            </script>    
+
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {
